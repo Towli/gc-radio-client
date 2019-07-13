@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Search from './components/Search';
 import logo from './logo.svg';
 import './App.css';
 
@@ -10,6 +11,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>GC RADIO</h2>
         </div>
+        <Search />
       </div>
     );
   }

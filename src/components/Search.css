@@ -1,0 +1,20 @@
+.search input {
+  -moz-appearance: none; /* older firefox */
+  -webkit-appearance: none; /* safari, chrome, edge and ie mobile */
+  appearance: none; /* rest */
+  width: 20em;
+  height: 3em;
+}
+
+#search {
+  border: none;
+  outline: none;
+}
+
+#search:focus {
+  border-left: 0.3em solid aqua;
+}
+
+.errors {
+  color: red;
+}

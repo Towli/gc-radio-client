@@ -7,7 +7,9 @@ export function search(query) {
     try {
       query = Query.isValid(query);
       makeRequest(config.API_URL, 'get', { q: query })
-        .then(resolve)
+        .then(results => {
+          resolve(results.data);
+        })
         .catch(reject);
     } catch (error) {
       reject(error);

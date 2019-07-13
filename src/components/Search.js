@@ -47,7 +47,8 @@ class Search extends Component {
     const query = event.target.value;
 
     try {
-      await API.search(query);
+      const url = await API.search(query);
+      this.props.callback(url);
     } catch (error) {
       const errors = this.state.errors;
       errors.push(error.message);

@@ -4,6 +4,9 @@
   appearance: none; /* rest */
   width: 20em;
   height: 3em;
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 3em;
 }
 
 #search {

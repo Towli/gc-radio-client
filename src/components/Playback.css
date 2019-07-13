@@ -1,0 +1,4 @@
+.playback-container {
+    height: 30em;
+    pointer-events: none;
+}

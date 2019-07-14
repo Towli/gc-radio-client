@@ -4,6 +4,8 @@ import Playback from './components/Playback';
 import logo from './logo.svg';
 import './App.css';
 
+import * as ws from './utils/websocket.utils';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,9 @@ class App extends Component {
   handleSearch = url => {
     this.setState({ src: url });
   };
+  componentWillMount() {
+    ws.init();
+  }
 }
 
 export default App;

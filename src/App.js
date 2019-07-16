@@ -28,6 +28,7 @@ class App extends Component {
   }
   handleSearch = url => {
     this.setState({ src: url });
+    ws.addToPlaylist(url);
   };
   componentWillMount() {
     ws.init();

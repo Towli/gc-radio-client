@@ -6,7 +6,7 @@ export function search(query) {
   return new Promise((resolve, reject) => {
     try {
       query = Query.isValid(query);
-      makeRequest(config.API_URL, 'get', { q: query })
+      makeRequest(config.API_URI, 'get', { q: query })
         .then(results => {
           resolve(results.data);
         })

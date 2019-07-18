@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as API from '../api';
-import './Search.css';
+import './search.css';
 
 class Search extends Component {
   constructor(props) {

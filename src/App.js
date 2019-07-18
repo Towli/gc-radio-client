@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Search from './components/Search';
-import Playback from './components/Playback';
-import logo from './logo.svg';
-import './App.css';
+import Search from './components/search';
+import Playback from './components/playback';
+import Sidebar from './components/sidebar/sidebar';
+import './app.css';
 
 import * as ws from './utils/websocket.utils';
 
@@ -16,13 +16,23 @@ class App extends Component {
   render() {
     const src = this.state.src;
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>GC RADIO</h2>
+      <div id="app-container">
+        <div id="column-1">
+          <Sidebar />
         </div>
-        <Search callback={this.handleSearch} />
-        <Playback src={src} />
+        <div id="column-2">
+          <div className="main-container">
+            <div className="header">
+              <div className="actions">
+                <button class="btn">add song</button>
+              </div>
+            </div>
+            {/* <Search callback={this.handleSearch} /> */}
+            <div className="playback-container">
+              <Playback src={src} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

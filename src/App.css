@@ -1,24 +1,80 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+#app-container {
+  display: flex;
+  flex-direction: row;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#column-1 {
+  background-color: #404b69;
+  width: 20%;
+  height: 100vh;
+  border-right: 1px solid white;
+  display: flex;
+  justify-content: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+#column-2 {
+  background-color: #e1e8ea;
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-container .header {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 9%;
+}
+
+.main-container .actions {
+  float: right;
+}
+
+.playback-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* buttons */
+
+.btn {
+  background: white;
+  padding: 1em 2em 1em 2em;
+  border: 1px solid #cccccc;
+}
+
+.btn:hover {
+  background-color: #3fbe45;
   color: white;
+  cursor: pointer;
 }
 
-.App-intro {
-  font-size: large;
+.btn:focus {
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.btn span {
+  display: inline;
+}
+
+.btn img {
+  height: 10px;
 }

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import Search from './components/search';
 import Playback from './components/playback';
 import Sidebar from './components/sidebar/sidebar';
 import './app.css';
 
 import * as ws from './utils/websocket.utils';
+import ModalBox from './components/modal/modal.box';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: null
+      src: null,
+      showSongSelectionModal: false
     };
   }
   render() {
-    const src = this.state.src;
     return (
       <div id="app-container">
         <div id="column-1">
@@ -24,15 +24,21 @@ class App extends Component {
           <div className="main-container">
             <div className="header">
               <div className="actions">
-                <button class="btn">add song</button>
+                <button className="btn" onClick={this.showSongSelectionModal}>
+                  add song
+                </button>
               </div>
             </div>
-            {/* <Search callback={this.handleSearch} /> */}
             <div className="playback-container">
-              <Playback src={src} />
+              <Playback src={this.state.src} />
             </div>
           </div>
         </div>
+        <ModalBox
+          show={this.state.showSongSelectionModal}
+          searchCallback={this.handleSearch}
+          onCloseCallback={this.hideSongSelectionModal}
+        />
       </div>
     );
   }
@@ -40,6 +46,15 @@ class App extends Component {
     this.setState({ src: url });
     ws.addToPlaylist(url);
   };
+
+  showSongSelectionModal = () => {
+    this.setState({ showSongSelectionModal: true });
+  };
+
+  hideSongSelectionModal = () => {
+    this.setState({ showSongSelectionModal: false });
+  };
+
   componentWillMount() {
     ws.init();
   }

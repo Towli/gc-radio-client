@@ -1,0 +1,60 @@
+@import '../../colors.css';
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  border: 1px solid;
+  padding: 2.5em;
+  box-sizing: border-box;
+  background-color: white;
+  width: 35em;
+  height: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box input {
+  width: 100%;
+  height: 3em;
+  border: 1px solid #efefef;
+  color: var(--color-1);
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+.modal-box-input {
+  width: 30em;
+  font-weight: 300;
+  font-size: 1em;
+}
+
+.modal-box label {
+  font-weight: 300;
+  padding-top: 9px;
+  color: var(--color-1);
+}
+
+.modal-box .header {
+  color: var(--color-1);
+}
+
+span {
+  display: block;
+  text-align: center;
+  color: var(--color-1);
+}
+
+.errors {
+  color: red;
+}

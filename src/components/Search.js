@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as API from '../api';
-import './search.css';
+// import './search.css';
+
+import { Url } from '../utils/validation.utils';
 
 class Search extends Component {
   constructor(props) {
@@ -12,6 +14,8 @@ class Search extends Component {
   }
   render() {
     const errors = this.state.errors;
+    const label = this.props.label;
+
     let errorView = null;
     if (errors) {
       errorView = (
@@ -24,6 +28,7 @@ class Search extends Component {
     }
     return (
       <div className="search">
+        <label>{label}</label>
         <input
           type="search"
           id="search"
@@ -36,15 +41,25 @@ class Search extends Component {
   }
 
   handleKeyDown = async event => {
-    this.setState({
-      errors: []
-    });
-
     if (event.keyCode !== 13 || !event.target.value) {
       return;
     }
 
+    this.setState({
+      errors: []
+    });
+
     const query = event.target.value;
+
+    if (this.props.type === 'url') {
+      if (!Url.isValid(query)) {
+        const errors = this.state.errors;
+        errors.push('Not a valid URL');
+        return this.setState({
+          errors: errors
+        });
+      }
+    }
 
     try {
       const url = await API.search(query);

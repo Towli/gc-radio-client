@@ -1,6 +1,7 @@
+@import './colors.css';
+
 body {
   margin: 0;
-  background-color: black;
-  color: white;
+  color: var(--color-1);
   font-family: 'Roboto Mono', monospace;
 }

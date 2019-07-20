@@ -3,7 +3,7 @@
   -webkit-appearance: none; /* safari, chrome, edge and ie mobile */
   appearance: none; /* rest */
   width: 20em;
-  height: 3em;
+  height: 4em;
   font-size: 1em;
   text-align: center;
   margin-bottom: 3em;
@@ -16,8 +16,4 @@
 
 #search:focus {
   border-left: 0.3em solid aqua;
-}
-
-.errors {
-  color: red;
 }

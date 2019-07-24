@@ -12,6 +12,8 @@ class Playback extends Component {
       return <div className="playback" />;
     }
 
+    console.log('render: ', this.state.src);
+
     return (
       <div className="playback">
         <iframe

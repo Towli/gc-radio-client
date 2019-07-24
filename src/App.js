@@ -4,13 +4,13 @@ import Sidebar from './components/sidebar/sidebar';
 import './app.css';
 
 import * as ws from './utils/websocket.utils';
-import ModalBox from './components/modal/modal.box';
+import SearchModal from './components/modal/search.modal';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: null,
+      video: { src: null, duration: null },
       showSongSelectionModal: false
     };
   }
@@ -30,11 +30,11 @@ class App extends Component {
               </div>
             </div>
             <div className="playback-container">
-              <Playback src={this.state.src} />
+              <Playback src={this.state.video.src} />
             </div>
           </div>
         </div>
-        <ModalBox
+        <SearchModal
           show={this.state.showSongSelectionModal}
           searchCallback={this.handleSearch}
           onCloseCallback={this.hideSongSelectionModal}
@@ -42,9 +42,10 @@ class App extends Component {
       </div>
     );
   }
-  handleSearch = url => {
-    this.setState({ src: url });
-    ws.addToPlaylist(url);
+  handleSearch = video => {
+    console.log('[handleSearch]: ', video);
+    // this.setState({ video: video });
+    ws.addToPlaylist(video);
   };
 
   showSongSelectionModal = () => {
@@ -57,6 +58,14 @@ class App extends Component {
 
   componentWillMount() {
     ws.init();
+    ws.registerHandler(ws.ACTIONS.PLAYBACK_STARTED, video => {
+      this.setState({
+        video: {
+          src: video.embedUrl,
+          duration: video.duration
+        }
+      });
+    });
   }
 }
 

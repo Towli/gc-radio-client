@@ -6,6 +6,7 @@ import './app.css';
 
 import * as ws from './utils/websocket.utils';
 import SearchModal from './components/modal/search.modal';
+import { ACTIONS } from '../src/constants/actions';
 
 class App extends Component {
   constructor(props) {
@@ -18,19 +19,12 @@ class App extends Component {
   render() {
     return (
       <div id="app-container">
-        <Topbar />
+        <Topbar callback={this.handleTopbarAction} />
         <div id="column-1">
           <Sidebar />
         </div>
         <div id="column-2">
           <div className="main-container">
-            <div className="header">
-              <div className="actions">
-                <button className="btn" onClick={this.showSongSelectionModal}>
-                  add song
-                </button>
-              </div>
-            </div>
             <div className="playback-container">
               <Playback src={this.state.video.src} />
             </div>
@@ -46,8 +40,13 @@ class App extends Component {
   }
   handleSearch = video => {
     console.log('[handleSearch]: ', video);
-    // this.setState({ video: video });
     ws.addToPlaylist(video);
+  };
+
+  handleTopbarAction = event => {
+    if (event === ACTIONS.ADD_SONG) {
+      this.showSongSelectionModal();
+    }
   };
 
   showSongSelectionModal = () => {

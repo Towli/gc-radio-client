@@ -20,3 +20,10 @@
 .topbar .header .app-name:hover {
     transform: scale(1.1);
 }
+
+.topbar .actions {
+    width: 89%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

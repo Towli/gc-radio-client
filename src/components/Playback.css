@@ -9,3 +9,24 @@ iframe {
   height: 100%;
   width: 100%;
 }
+
+@media (max-width: 968px) {
+  .playback {
+    height: 20em;
+    width: calc(20em * 1.77777777778);
+  }
+}
+
+@media (max-width: 600px) {
+  .playback {
+    height: 15em;
+    width: calc(15em * 1.77777777778);
+  }
+}
+
+@media (max-width: 600px) {
+  .playback {
+    height: 13em;
+    width: calc(13em * 1.77777777778);
+  }
+}

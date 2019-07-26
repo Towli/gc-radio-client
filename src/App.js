@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Playback from './components/playback';
+import Topbar from './components/topbar/topbar';
 import Sidebar from './components/sidebar/sidebar';
 import './app.css';
 
@@ -17,6 +18,7 @@ class App extends Component {
   render() {
     return (
       <div id="app-container">
+        <Topbar />
         <div id="column-1">
           <Sidebar />
         </div>

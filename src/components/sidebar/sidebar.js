@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import './sidebar.css';
 
+import NowPlayingIcon from '../icons/now.playing';
+import SocialIcon from '../icons/social';
+import QueueIcon from '../icons/queue';
+
 class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <div className="header">
-          <a href="#">bonk.fm</a>
-        </div>
+        <div className="gutter" />
         <div className="sidebar-container">
-          <div className="sidebar-icon-container" />
           <ul className="sidebar-main">
             <a href="#">
-              <li>queue</li>
+              <li>
+                <NowPlayingIcon className="icon" />
+              </li>
             </a>
             <a href="#">
-              <li>who's online</li>
+              <li>
+                <SocialIcon className="icon" />
+              </li>
             </a>
             <a href="#">
-              <li>history</li>
-            </a>
-            <a href="#">
-              <li>reputation</li>
+              <li>
+                <QueueIcon className="icon" />
+              </li>
             </a>
           </ul>
         </div>

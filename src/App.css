@@ -47,12 +47,6 @@
   float: right;
 }
 
-.playback-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
 /* buttons */
 
 .btn {

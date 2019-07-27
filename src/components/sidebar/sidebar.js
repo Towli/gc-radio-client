@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './sidebar.css';
 
 import NowPlayingIcon from '../icons/now.playing';
@@ -12,21 +13,23 @@ class Sidebar extends Component {
         <div className="gutter" />
         <div className="sidebar-container">
           <ul className="sidebar-main">
-            <a href="#">
-              <li>
+            <li>
+              <NavLink exact to="/live">
                 <NowPlayingIcon className="icon" />
-              </li>
-            </a>
-            <a href="#">
-              <li>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink exact to="/social">
                 <SocialIcon className="icon" />
-              </li>
-            </a>
-            <a href="#">
-              <li>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink exact to="/queue">
                 <QueueIcon className="icon" />
-              </li>
-            </a>
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

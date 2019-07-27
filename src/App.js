@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import Playback from './components/playback';
 import Topbar from './components/topbar/topbar';
 import Sidebar from './components/sidebar/sidebar';
@@ -25,9 +26,27 @@ class App extends Component {
         </div>
         <div id="column-2">
           <div className="main-container">
-            <div className="playback-container">
-              <Playback src={this.state.video.src} />
-            </div>
+            <Route
+              exact
+              path="/live"
+              render={props => {
+                return <Playback src={this.state.video.src} />;
+              }}
+            />
+            <Route
+              exact
+              path="/social"
+              render={props => {
+                return <h1>SOCIAL</h1>;
+              }}
+            />
+            <Route
+              exact
+              path="/queue"
+              render={props => {
+                return <h1>QUEUE</h1>;
+              }}
+            />
           </div>
         </div>
         <SearchModal

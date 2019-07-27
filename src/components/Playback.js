@@ -9,24 +9,30 @@ class Playback extends Component {
   }
   render() {
     if (!this.state.src) {
-      return <div className="playback" />;
+      return (
+        <div className="playback-container">
+          <div className="playback" />
+        </div>
+      );
     }
 
     console.log('render: ', this.state.src);
 
     return (
-      <div className="playback">
-        <iframe
-          id="ytplayer"
-          type="text/html"
-          width="640"
-          height="360"
-          src={
-            this.state.src +
-            '?autoplay=1&controls=0&disablekb=1&enablejsapi=1&origin=http://localhost:3000'
-          }
-          frameBorder="0"
-        />
+      <div className="playback-container">
+        <div className="playback">
+          <iframe
+            id="ytplayer"
+            type="text/html"
+            width="640"
+            height="360"
+            src={
+              this.state.src +
+              '?autoplay=1&controls=0&disablekb=1&enablejsapi=1&origin=http://localhost:3000'
+            }
+            frameBorder="0"
+          />
+        </div>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './topbar.css';
 import { ACTIONS } from '../../constants/actions';
 
@@ -7,9 +8,9 @@ class Topbar extends Component {
     return (
       <div className="topbar">
         <div className="header">
-          <a href="#" className="app-name">
+          <NavLink className="app-name" exact to="/live">
             bonk.fm
-          </a>
+          </NavLink>
         </div>
         <div className="actions">
           <button

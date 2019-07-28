@@ -3,7 +3,7 @@
     top: 0;
     width: 100%;
     height: 7.5%;
-    background-color: var(--color-1);
+    background-color: var(--color-dark-1);
     display: flex;
     align-items: center;
 }
@@ -15,6 +15,7 @@
 .topbar .header .app-name {
     display: inline-block;
     font-size: 1.25em;
+    color: var(--color-light-1);
 }
 
 .topbar .header .app-name:hover {
@@ -23,7 +24,19 @@
 
 .topbar .actions {
     width: 89%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.topbar .actions .btn {
+    height: 100%;
+    border: none;
+    background-color: var(--color-posi-1);
+    color: var(--color-light-1);
+}
+
+.topbar .actions .btn:hover {
+    background-color: var(--color-posi-2);
 }

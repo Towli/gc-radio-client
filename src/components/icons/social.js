@@ -4,7 +4,7 @@ const SvgComponent = props => (
   <svg viewBox="0 0 283.5 283.5" {...props}>
     <style>
       {
-        ".prefix__st0{display:none}.prefix__st1,.prefix__st2{display:inline}.prefix__st2,.prefix__st3{fill:#fff}.prefix__st5{display:inline;fill:none;stroke:#c63872;stroke-width:3;stroke-miterlimit:10}"
+        ".prefix__st0{display:none}.prefix__st1,.prefix__st2{display:inline}.prefix__st2,.prefix__st3{fill:#c3c3c3}.prefix__st5{display:inline;fill:none;stroke:#c63872;stroke-width:3;stroke-miterlimit:10}"
       }
     </style>
     <g id="prefix__Layer_2" className="prefix__st0">

@@ -12,7 +12,7 @@
 }
 
 .sidebar-container {
-  background-color: var(--color-2);
+  background-color: var(--color-dark-1);
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -36,7 +36,6 @@
 .sidebar-icon-container {
   width: 5%;
   height: 100%;
-  background-color: var(--color-4);
 }
 
 a {
@@ -44,7 +43,7 @@ a {
   color: white;
 }
 
-li:hover {
+.icon:hover {
   transform: scale(1.3);
 }
 

@@ -1,0 +1,12 @@
+.queue-item {
+    display: flex;
+    width: 100%;
+    border: 1px solid var(--color-light-2);
+    background-color: var(--color-light-2);
+    color: var(--color-dark-1);
+    padding: 1em;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: 1em;
+}

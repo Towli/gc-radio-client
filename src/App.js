@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import Playback from './components/playback';
+import Playback from './pages/playback/playback';
+import Queue from './pages/queue/queue';
 import Topbar from './components/topbar/topbar';
 import Sidebar from './components/sidebar/sidebar';
 import './app.css';
 
 import * as ws from './utils/websocket.utils';
 import SearchModal from './components/modal/search.modal';
-import { ACTIONS } from '../src/constants/actions';
+import { ACTIONS } from './constants/actions';
+
+const mockItems = [
+  {
+    name: 'test',
+    url: 'https://youtube.com/embed/wfjnwef',
+    duration: 150,
+    user: 'unknown'
+  }
+];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       video: { src: null, duration: null },
+      queue: [],
       showSongSelectionModal: false
     };
   }
@@ -44,7 +55,7 @@ class App extends Component {
               exact
               path="/queue"
               render={props => {
-                return <h1>QUEUE</h1>;
+                return <Queue items={this.state.queue} />;
               }}
             />
           </div>
@@ -76,6 +87,8 @@ class App extends Component {
     this.setState({ showSongSelectionModal: false });
   };
 
+  // fetchQueue = () => {};
+
   componentWillMount() {
     ws.init();
     ws.registerHandler(ws.ACTIONS.PLAYBACK_STARTED, video => {
@@ -84,6 +97,11 @@ class App extends Component {
           src: video.embedUrl,
           duration: video.duration
         }
+      });
+    });
+    ws.registerHandler(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
+      this.setState({
+        playlist: playlist
       });
     });
   }

@@ -1,0 +1,17 @@
+.queue-container {
+  height: 80%;
+  width: 60%;
+}
+
+.queue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+  padding: 1em;
+}
+
+.main-container {
+  overflow: scroll;
+}

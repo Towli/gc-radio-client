@@ -6,16 +6,14 @@
 }
 
 #column-1 {
-  background-color: #404b69;
   width: 4em;
   height: 100vh;
-  border-right: 1px solid white;
   display: flex;
   justify-content: center;
 }
 
 #column-2 {
-  background-color: var(--color-3);
+  background-color: var(--color-dark-2);
   width: 100%;
   height: 100vh;
   display: flex;
@@ -24,6 +22,7 @@
 }
 
 .main-container {
+  margin-top: 4em;
   height: 100%;
   width: 100%;
   padding-left: 5%;
@@ -32,6 +31,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .main-container .header {
@@ -50,23 +50,24 @@
 /* buttons */
 
 .btn {
-  background-color: var(--color-1);
-  color: white;
+  color: var(--color-light-3);
+  background-color: var(--color-posi-1);
   padding: 1em 2em 1em 2em;
-  border: 1px solid #cccccc;
+  border: none;
 }
 
 .btn:hover {
-  background-color: var(--color-4);
-  color: black;
-  border: 1px solid black;
+  background-color: var(--color-posi-2);
   cursor: pointer;
+  transform: scale(1.1)
+}
+
+.btn-danger {
+  background-color: var(--color-danger-1);
 }
 
 .btn-danger:hover {
-  background-color: var(--color-5);
-  color: white;
-  border: 1px solid black;
+  background-color: var(--color-danger-1);
   cursor: pointer;
 }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './playback.css';
 
+import * as ws from '../../utils/websocket.utils';
+
 class Playback extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +38,16 @@ class Playback extends Component {
       </div>
     );
   }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    ws.emit(ws.ACTIONS.PLAYBACK_FETCH, playback => {
+      console.log('returned');
+      console.log(ws.ACTIONS.PLAYBACK_FETCH, playback.src);
+      this.setState({ src: playback.src });
+    });
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (props.src && props.src !== state.src) {
       return {

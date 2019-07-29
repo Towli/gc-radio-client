@@ -1,17 +1,5 @@
 /* colors */
 
-/* :root {
-  --color-dark-1: #111111;
-  --color-dark-2: #191919;
-  --color-light-1: #c3c3c3;
-  --color-light-2: #fdf7e7;
-  --color-danger-1: #df6c4f;
-  --color-posi-1: #00fca3;
-  --color-posi-2: #3c948b;
-  --color-posi-3: #1a99aa;
-  --color-neutral-1: #ecd06f;
-} */
-
 :root {
   --color-dark-1: #111111;
   --color-dark-2: #191919;
@@ -23,5 +11,7 @@
   --color-posi-2: #3700b3;
   --color-posi-3: #03dac6;
   --color-posi-4: #018786;
+  --color-posi-5: #75bcb9;
+  --color-posi-6: #00818a;
   --color-neutral-1: #ecd06f;
 }

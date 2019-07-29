@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './queue.css';
 
+import * as ws from '../../utils/websocket.utils';
 import QueueItem from './queue.item';
 
 class Queue extends Component {
@@ -10,7 +11,6 @@ class Queue extends Component {
     this.state = { items: [] };
   }
   render() {
-    console.log(this.state.items);
     const items = this.state.items;
     if (items.length < 1) {
       return (
@@ -20,18 +20,19 @@ class Queue extends Component {
       );
     }
 
-    console.log('render: ', this.state.items);
-
     return (
       <div className="queue-container">
-        <div class="queue">
+        <div className="queue">
           {items.map((item, index) => {
+            let parsedItem = JSON.parse(item);
             return (
               <QueueItem
                 key={index}
-                name={item.name}
-                duration={item.duration}
-                user={item.user}
+                index={index + 1}
+                name={parsedItem.title}
+                thumbnail={parsedItem.thumbnail}
+                duration={parsedItem.duration}
+                user={parsedItem.user}
               />
             );
           })}
@@ -48,6 +49,12 @@ class Queue extends Component {
     }
 
     return null;
+  }
+
+  componentDidMount() {
+    ws.emit(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
+      console.log(playlist);
+    });
   }
 }
 

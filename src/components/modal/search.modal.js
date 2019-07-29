@@ -88,7 +88,6 @@ class SearchModal extends Component {
 
   search = async () => {
     const query = this.state.query;
-    const errors = this.state.errors;
 
     this.resetErrors();
 

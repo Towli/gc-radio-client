@@ -10,20 +10,11 @@ import * as ws from './utils/websocket.utils';
 import SearchModal from './components/modal/search.modal';
 import { ACTIONS } from './constants/actions';
 
-const mockItems = [
-  {
-    name: 'test',
-    url: 'https://youtube.com/embed/wfjnwef',
-    duration: 150,
-    user: 'unknown'
-  }
-];
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      video: { src: null, duration: null },
+      video: { src: null, currentTime: null },
       queue: [],
       showSongSelectionModal: false
     };
@@ -87,21 +78,26 @@ class App extends Component {
     this.setState({ showSongSelectionModal: false });
   };
 
-  // fetchQueue = () => {};
-
   componentWillMount() {
     ws.init();
+    ws.registerHandler(ws.ACTIONS.PLAYBACK_FETCH, result => {
+      this.setState({
+        video: {
+          src: result.currentPlayback.embedUrl,
+          currentTime: result.currentTime
+        }
+      });
+    });
     ws.registerHandler(ws.ACTIONS.PLAYBACK_STARTED, video => {
       this.setState({
         video: {
-          src: video.embedUrl,
-          duration: video.duration
+          src: video.embedUrl
         }
       });
     });
     ws.registerHandler(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
       this.setState({
-        playlist: playlist
+        queue: playlist
       });
     });
   }

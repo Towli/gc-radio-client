@@ -51,15 +51,15 @@
 
 .btn {
   color: var(--color-light-3);
-  background-color: var(--color-posi-1);
+  background-color: var(--color-posi-6);
   padding: 1em 2em 1em 2em;
   border: none;
 }
 
 .btn:hover {
-  background-color: var(--color-posi-2);
+  background-color: var(--color-posi-5);
   cursor: pointer;
-  transform: scale(1.1)
+  transform: scale(1.1);
 }
 
 .btn-danger {

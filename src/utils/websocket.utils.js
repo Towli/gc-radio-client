@@ -8,9 +8,10 @@ export const ACTIONS = {
   LOGOUT: 'logout',
   PLAYLIST_ADD: 'playlist_add',
   PLAYLIST_REMOVE: 'playlist_remove',
-  PLAYBACK_FETCH: 'playlist_fetch',
+  PLAYLIST_FETCH: 'playlist_fetch',
   PLAYBACK_STARTED: 'playback_started',
-  PLAYBACK_ENDED: 'playback_ended'
+  PLAYBACK_ENDED: 'playback_ended',
+  PLAYBACK_FETCH: 'playback_fetch'
 };
 
 export function init() {
@@ -24,6 +25,7 @@ export function registerHandler(action, callback) {
 }
 
 export function emit(message, callback) {
+  console.log('emitting: ', message);
   socket.emit(message, callback);
 }
 

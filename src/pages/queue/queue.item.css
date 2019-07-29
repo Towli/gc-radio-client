@@ -1,12 +1,48 @@
 .queue-item {
-    display: flex;
-    width: 100%;
-    border: 1px solid var(--color-light-2);
-    background-color: var(--color-light-2);
-    color: var(--color-dark-1);
-    padding: 1em;
-    flex-direction: row;
-    justify-content: space-between;
-    box-sizing: border-box;
-    margin-bottom: 1em;
+  display: flex;
+  width: 100%;
+  border-top: 1px solid var(--color-light-1);
+  border-bottom: 1px solid var(--color-light-1);
+  color: var(--color-light-3);
+  padding: 1em;
+  flex-direction: row;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+}
+
+.queue-item:hover {
+  transform: scale(1.01);
+}
+
+.item-thumbnail {
+  align-self: flex-start;
+  width: 240px;
+  height: 135px;
+}
+
+.item-name {
+  text-align: left;
+  text-transform: uppercase;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.item-user,
+.item-duration {
+  text-align: left;
+  display: inline-block;
+  width: 50%;
+}
+
+.item-detail {
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-index {
+  align-self: center;
+  text-align: left;
+  width: 3em;
 }

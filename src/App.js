@@ -32,7 +32,12 @@ class App extends Component {
               exact
               path="/live"
               render={props => {
-                return <Playback src={this.state.video.src} />;
+                return (
+                  <Playback
+                    src={this.state.video.src}
+                    currentTime={this.state.video.currentTime}
+                  />
+                );
               }}
             />
             <Route
@@ -60,7 +65,6 @@ class App extends Component {
     );
   }
   handleSearch = video => {
-    console.log('[handleSearch]: ', video);
     ws.addToPlaylist(video);
   };
 

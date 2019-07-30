@@ -25,7 +25,7 @@ export function registerHandler(action, callback) {
 }
 
 export function emit(message, callback) {
-  console.log('emitting: ', message);
+  console.log('[emit]: ', message);
   socket.emit(message, callback);
 }
 

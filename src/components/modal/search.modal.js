@@ -37,7 +37,7 @@ class SearchModal extends Component {
     return (
       <div className="modal">
         <div className="modal-box">
-          <div className="header">queue song</div>
+          <div className="header">queue item</div>
           <div className="inputs-container">
             <div className="modal-box-input">
               <div className="search">

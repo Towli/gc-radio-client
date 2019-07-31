@@ -69,7 +69,7 @@ class App extends Component {
   };
 
   handleTopbarAction = event => {
-    if (event === ACTIONS.ADD_SONG) {
+    if (event === ACTIONS.ADD_ITEM) {
       this.showSongSelectionModal();
     }
   };

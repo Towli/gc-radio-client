@@ -33,12 +33,22 @@ class Queue extends Component {
                 thumbnail={parsedItem.thumbnail}
                 duration={parsedItem.duration}
                 user={parsedItem.user}
+                callback={this.removeItem}
               />
             );
           })}
         </div>
       </div>
     );
+  }
+
+  removeItem(id) {
+    console.log('removeItem');
+    console.log(id);
+    ws.emit(ws.ACTIONS.PLAYLIST_REMOVE, id),
+      () => {
+        this.fetch();
+      };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -52,8 +62,14 @@ class Queue extends Component {
   }
 
   componentDidMount() {
-    ws.emit(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
-      console.log(playlist);
+    ws.emit(ws.ACTIONS.PLAYLIST_FETCH, {}, playlist => {
+      console.log('playlist: ', playlist);
+    });
+  }
+
+  fetch() {
+    ws.emit(ws.ACTIONS.PLAYLIST_FETCH, {}, playlist => {
+      console.log('playlist: ', playlist);
     });
   }
 }

@@ -46,3 +46,21 @@
   text-align: left;
   width: 3em;
 }
+
+.item-actions {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.item-actions button {
+  height: 25%;
+  background-color: var(--color-light-2);
+  color: black;
+}
+
+.item-actions button:hover {
+  transform: none;
+  color: white;
+}

@@ -24,9 +24,9 @@ export function registerHandler(action, callback) {
   socket.on(action, callback);
 }
 
-export function emit(message, callback) {
+export function emit(message, data, callback) {
   console.log('[emit]: ', message);
-  socket.emit(message, callback);
+  socket.emit(message, data, callback);
 }
 
 export function addToPlaylist(url) {

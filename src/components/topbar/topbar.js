@@ -16,10 +16,10 @@ class Topbar extends Component {
           <button
             className="btn"
             onClick={() => {
-              this.props.callback(ACTIONS.ADD_SONG);
+              this.props.callback(ACTIONS.ADD_ITEM);
             }}
           >
-            add song
+            add item
           </button>
         </div>
       </div>

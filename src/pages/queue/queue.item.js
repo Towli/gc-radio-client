@@ -14,9 +14,18 @@ class Queue extends Component {
           </span>
           <span className="item-user">user: {this.props.user || 'anon'}</span>
         </div>
+        <div className="item-actions">
+          <button className="btn btn-danger" onClick={this.remove}>
+            remove
+          </button>
+        </div>
       </div>
     );
   }
+
+  remove = () => {
+    this.props.callback && this.props.callback(this.props.index - 1);
+  };
 
   convertMsToTime(ms) {
     return new Date(ms)

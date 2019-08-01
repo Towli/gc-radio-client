@@ -10,19 +10,20 @@ class Playback extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { src: null, currentTime: 0 };
   }
   render() {
-    if (!this.state.src) {
+    console.log('render - ', this.props);
+    if (!this.props.src) {
       return (
         <div className="playback-container">
-          <div className="playback">
+          <div className="playback blank">
             <div id="ytplayer" />
           </div>
         </div>
       );
     }
+
+    this.startPlayback();
 
     return (
       <div className="playback-container">
@@ -34,30 +35,32 @@ class Playback extends Component {
   }
 
   componentDidMount() {
+    console.log('componentDidMount - ', 'props: ', this.props);
     ws.emit(ws.ACTIONS.PLAYBACK_FETCH);
 
     this.player = new YouTubePlayer('ytplayer', {
-      videoId: this.getVideoId(this.state.src),
+      playerVars: { autoplay: 1, controls: 1 },
       width: 640,
       height: 360
     });
 
-    this.player.playVideo();
-    this.player.seekTo(this.state.currentTime);
+    // this.startPlayback();
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (
-      (props.src && props.src !== state.src) ||
-      (props.currentTime && props.currentTime !== state.currentTime)
-    ) {
-      return {
-        src: props.src,
-        currentTime: props.currentTime
-      };
+  startPlayback() {
+    if (this.player) {
+      this.player.loadVideoById(
+        this.getVideoId(this.props.src),
+        this.props.currentTime
+      );
     }
+  }
 
-    return null;
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.props.src !== nextProps.src ||
+      this.props.currentTime !== nextProps.currentTime
+    );
   }
 
   getVideoId(src) {

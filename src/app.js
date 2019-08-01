@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Playback from './pages/playback/playback';
 import Queue from './pages/queue/queue';
 import Topbar from './components/topbar/topbar';
@@ -28,6 +28,7 @@ class App extends Component {
         </div>
         <div id="column-2">
           <div className="main-container">
+            <Redirect from="/" to="/live" />
             <Route
               exact
               path="/live"
@@ -85,6 +86,8 @@ class App extends Component {
   componentWillMount() {
     ws.init();
     ws.registerHandler(ws.ACTIONS.PLAYBACK_FETCH, result => {
+      console.log('[playback_fetch] returned result');
+      console.log(result);
       this.setState({
         video: {
           src: result.currentPlayback.embedUrl,

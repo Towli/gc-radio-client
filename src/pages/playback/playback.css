@@ -7,8 +7,12 @@
 .playback {
   height: 30em;
   width: calc(30em * 1.77777777778);
-  pointer-events: none;
+  /* pointer-events: none; */
   background-color: black;
+}
+
+.blank > iframe {
+  display: none;
 }
 
 iframe {

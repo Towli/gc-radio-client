@@ -38,5 +38,19 @@
 }
 
 .topbar .actions .btn:hover {
-  /* background-color: var(--color-posi-5); */
+  background-color: var(--color-posi-2);
+}
+
+.logo {
+  position: absolute;
+  top: 0.75em;
+  left: 0.75em;
+  height: 2.5em;
+  width: 2.5em;
+  background-image: url(../icons/bonk_logo.png);
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.logo:hover {
+  transform: scale(1.1);
 }

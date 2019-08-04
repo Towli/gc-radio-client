@@ -9,7 +9,7 @@ class Topbar extends Component {
     return (
       <div className="topbar">
         <div className="header">
-          <div class='logo'></div>
+          <div className='logo'></div>
           <NavLink className="app-name" exact to="/live">
             bonk.fm
           </NavLink>

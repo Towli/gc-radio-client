@@ -13,25 +13,31 @@ class Playback extends Component {
   }
   render() {
     console.log('render - ', this.props);
-    if (!this.props.src) {
-      return (
-        <div className="playback-container">
-          <div className="playback blank">
-            <div id="ytplayer" />
-          </div>
+
+    const blankContainer = (
+      <div className="playback-container">
+        <div className="playback blank">
+          <div id="ytplayer" />
         </div>
-      );
-    }
+      </div>
+    );
 
-    this.startPlayback();
-
-    return (
+    let playbackContainer = (
       <div className="playback-container">
         <div className="playback">
           <div id="ytplayer" />
         </div>
       </div>
     );
+
+    if (!this.props.src) {
+      this.player && this.player.stopVideo();
+      return blankContainer;
+    }
+
+    this.startPlayback();
+
+    return playbackContainer;
   }
 
   componentDidMount() {
@@ -43,12 +49,11 @@ class Playback extends Component {
       width: 640,
       height: 360
     });
-
-    // this.startPlayback();
   }
 
   startPlayback() {
     if (this.player) {
+      console.log('starting playing: ', this.props.src, this.props.currentTime);
       this.player.loadVideoById(
         this.getVideoId(this.props.src),
         this.props.currentTime
@@ -57,6 +62,13 @@ class Playback extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log(
+      'shouldComponentUpdate',
+      this.props.src !== nextProps.src ||
+        this.props.currentTime !== nextProps.currentTime,
+      nextProps.src,
+      nextProps.currentTime
+    );
     return (
       this.props.src !== nextProps.src ||
       this.props.currentTime !== nextProps.currentTime

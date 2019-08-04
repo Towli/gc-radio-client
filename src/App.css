@@ -47,6 +47,18 @@
   float: right;
 }
 
+.floating-container {
+  position: absolute;
+  z-index: 999;
+  bottom: 2vh;
+  right: 2vw;
+}
+
+.floating-container .playback {
+  height: 15em;
+  width: calc(15em * 1.77777777778);
+}
+
 /* buttons */
 
 .btn {
@@ -81,10 +93,4 @@
 
 .btn img {
   height: 10px;
-}
-
-/* inputs */
-
-input:focus {
-  outline: none;
 }

@@ -16,7 +16,8 @@ class App extends Component {
     this.state = {
       video: { src: null, currentTime: null },
       queue: [],
-      showSongSelectionModal: false
+      showSongSelectionModal: false,
+      isPlaybackFloating: false
     };
   }
   render() {
@@ -28,23 +29,27 @@ class App extends Component {
         </div>
         <div id="column-2">
           <div className="main-container">
+            <div
+              className={this.state.isPlaybackFloating && 'floating-container'}
+            >
+              <Playback
+                src={this.state.video.src}
+                currentTime={this.state.video.currentTime}
+              />
+            </div>
             <Redirect from="/" to="/live" />
             <Route
               exact
               path="/live"
               render={props => {
-                return (
-                  <Playback
-                    src={this.state.video.src}
-                    currentTime={this.state.video.currentTime}
-                  />
-                );
+                this.setState({ isPlaybackFloating: false });
               }}
             />
             <Route
               exact
               path="/social"
               render={props => {
+                this.setState({ isPlaybackFloating: true });
                 return <h1>SOCIAL</h1>;
               }}
             />
@@ -52,6 +57,7 @@ class App extends Component {
               exact
               path="/queue"
               render={props => {
+                this.setState({ isPlaybackFloating: true });
                 return <Queue items={this.state.queue} />;
               }}
             />
@@ -68,6 +74,16 @@ class App extends Component {
   handleSearch = video => {
     ws.addToPlaylist(video);
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[app.js, shouldComponentUpdate]', this.state, nextState);
+    return (
+      nextState.isPlaybackFloating !== this.state.isPlaybackFloating ||
+      nextState.showSongSelectionModal !== this.state.showSongSelectionModal ||
+      nextState.queue !== this.state.queue ||
+      nextState.video !== this.state.video
+    );
+  }
 
   handleTopbarAction = event => {
     if (event === ACTIONS.ADD_ITEM) {
@@ -105,6 +121,14 @@ class App extends Component {
     ws.registerHandler(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
       this.setState({
         queue: playlist
+      });
+    });
+    ws.registerHandler(ws.ACTIONS.PLAYBACK_ENDED, playlist => {
+      console.log('[playback_ended]');
+      this.setState({
+        video: {
+          src: null
+        }
       });
     });
   }

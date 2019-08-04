@@ -6,9 +6,17 @@ import { Url } from '../../utils/validation.utils';
 
 import './modal.box.css';
 
+const QUERY_TYPES = {
+  KEYWORD: 'keyword',
+  ID: 'id'
+};
+
 class SearchModal extends Component {
   constructor(props) {
     super(props);
+
+    this.searchInputQuery = React.createRef();
+    this.searchInputUrl = React.createRef();
 
     this.state = {
       show: false,
@@ -44,9 +52,13 @@ class SearchModal extends Component {
                 <label>search by query</label>
                 <input
                   type="search"
-                  id="search"
+                  id="query"
+                  autocomplete="off"
+                  ref={this.searchInputQuery}
                   onKeyDown={this.handleKeyDown}
-                  onChange={this.handleQueryChange}
+                  onChange={event => {
+                    this.handleQueryChange(event);
+                  }}
                   placeholder="enter song name.."
                 />
               </div>
@@ -55,9 +67,13 @@ class SearchModal extends Component {
                 <label>search by url</label>
                 <input
                   type="search"
-                  id="search"
+                  id="url"
+                  autocomplete="off"
+                  ref={this.searchInputUrl}
                   onKeyDown={this.handleKeyDown}
-                  onChange={this.handleQueryChange}
+                  onChange={event => {
+                    this.handleQueryChange(event, QUERY_TYPES.ID);
+                  }}
                   placeholder="enter url.."
                 />
               </div>
@@ -82,12 +98,18 @@ class SearchModal extends Component {
     );
   }
 
-  handleQueryChange = event => {
-    this.setState({ query: event.target.value });
+  handleQueryChange = (event, type = QUERY_TYPES.KEYWORD) => {
+    if (type === QUERY_TYPES.ID) {
+      this.searchInputQuery.current.value = '';
+    } else {
+      this.searchInputUrl.current.value = '';
+    }
+
+    this.setState({ query: event.target.value, queryType: type });
   };
 
   search = async () => {
-    const query = this.state.query;
+    let query = this.state.query;
 
     this.resetErrors();
 
@@ -95,20 +117,32 @@ class SearchModal extends Component {
       return this.addError('invalid query');
     }
 
-    if (this.props.type === 'url') {
-      if (!Url.isValid(query)) {
-        return this.addError('invalid url');
-      }
+    if (this.state.queryType === QUERY_TYPES.ID) {
+      query = this.getIdFromYoutubeUrl(query);
     }
 
     try {
-      const video = await API.search(query);
+      const video = await API.search(query, this.state.queryType);
       this.props.searchCallback(video);
       this.props.onCloseCallback();
     } catch (error) {
       this.addError(error.message);
     }
   };
+
+  getIdFromYoutubeUrl(url) {
+    if (!Url.isValidYoutubeUrl(url)) {
+      return this.addError('invalid youtube url');
+    }
+
+    const id = url.split('v=')[1];
+
+    if (!id) {
+      return this.addError('invalid youtube url');
+    }
+
+    return id;
+  }
 
   handleKeyDown = async event => {
     if (event.keyCode !== 13 || !event.target.value) {

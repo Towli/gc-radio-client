@@ -94,3 +94,20 @@
 .btn img {
   height: 10px;
 }
+
+@media (max-width: 968px) {
+  .floating-container .playback {
+    height: 12em;
+    width: calc(12em * 1.77777777778);
+  }
+}
+
+@media (max-width: 600px) {
+  #column-1 {
+    width: 2.5em;
+  }
+  .floating-container .playback {
+    height: 10em;
+    width: calc(10em * 1.77777777778);
+  }
+}

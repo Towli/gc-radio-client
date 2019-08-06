@@ -64,3 +64,34 @@ span {
 .errors {
   color: red;
 }
+
+@media (max-width: 968px) {
+  .modal-box {
+    height: 50%;
+    width: 90%;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.2em;
+  }
+
+  .inputs-container {
+    width: 90%;
+  }
+
+  .modal-box-input {
+    width: 100%;
+  }
+
+  .modal-box-input input {
+    height: 4em;
+    font-size: 0.6em;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-box {
+    height: 25em;
+    width: calc(15em * 1.77777777778);
+    font-size: 0.8em;
+  }
+}

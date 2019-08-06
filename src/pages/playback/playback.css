@@ -20,14 +20,14 @@ iframe {
   width: 100%;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1024px) {
   .playback {
     height: 20em;
     width: calc(20em * 1.77777777778);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .playback {
     height: 15em;
     width: calc(15em * 1.77777777778);

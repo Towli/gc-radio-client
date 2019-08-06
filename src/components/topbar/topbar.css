@@ -9,10 +9,13 @@
 }
 
 .topbar .header {
-  margin-left: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .topbar .header .app-name {
+  margin-left: .5em;
   display: inline-block;
   font-size: 1.25em;
   color: var(--color-light-1);
@@ -41,16 +44,28 @@
   background-color: var(--color-posi-2);
 }
 
+.logo-container {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 4em;
+}
+
 .logo {
-  position: absolute;
-  top: 0.75em;
-  left: 0.75em;
-  height: 2.5em;
-  width: 2.5em;
-  background-image: url(../icons/bonk_logo.png);
+  margin: auto;
+  vertical-align: center;
+  height: 2em;
+  width: 2em;
   background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 .logo:hover {
   transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .logo-container {
+    width: 2.5em;
+  }
 }

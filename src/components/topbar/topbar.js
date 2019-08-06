@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './topbar.css';
 import { ACTIONS } from '../../constants/actions';
-import logo from '../icons/bonk_logo.png';
+import BonkLogo from '../icons/bonk.logo';
 
 class Topbar extends Component {
   render() {
     return (
       <div className="topbar">
         <div className="header">
-          <div className='logo'></div>
+          <div className="logo-container">
+            <BonkLogo className="logo" />
+          </div>
           <NavLink className="app-name" exact to="/live">
             bonk.fm
           </NavLink>

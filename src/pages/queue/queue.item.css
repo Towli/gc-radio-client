@@ -1,5 +1,6 @@
 .queue-item {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   border-top: 1px solid var(--color-light-1);
   border-bottom: 1px solid var(--color-light-1);
@@ -63,4 +64,31 @@
 .item-actions button:hover {
   transform: none;
   color: white;
+}
+
+@media (max-width: 600px) {
+  .item-index {
+    display: none;
+  }
+  .item-detail {
+    width: 50%;
+    margin: 0.5em;
+    font-size: 0.5em;
+  }
+
+  .item-thumbnail {
+    width: 120px;
+    height: 67px;
+  }
+
+  .item-actions {
+    position: relative;
+    top: -5em;
+    left: 1em;
+  }
+
+  .item-actions button {
+    height: auto;
+    background-color: var(--color-danger-1);
+  }
 }

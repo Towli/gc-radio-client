@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Playback from './pages/playback/playback';
 import Queue from './pages/queue/queue';
+import History from './pages/history/history';
 import Topbar from './components/topbar/topbar';
 import Sidebar from './components/sidebar/sidebar';
 import './app.css';
@@ -16,6 +17,7 @@ class App extends Component {
     this.state = {
       video: { src: null, currentTime: null },
       queue: [],
+      history: [],
       showSongSelectionModal: false,
       isPlaybackFloating: false
     };
@@ -50,7 +52,15 @@ class App extends Component {
               path="/social"
               render={props => {
                 this.setState({ isPlaybackFloating: true });
-                return <h1>SOCIAL</h1>;
+                return <h3>coming soon</h3>;
+              }}
+            />
+            <Route
+              exact
+              path="/history"
+              render={props => {
+                this.setState({ isPlaybackFloating: true });
+                return <History items={this.state.history} />;
               }}
             />
             <Route
@@ -72,16 +82,16 @@ class App extends Component {
     );
   }
   handleSearch = video => {
-    ws.addToPlaylist(video);
+    ws.addToPlaylist(JSON.stringify(video));
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('[app.js, shouldComponentUpdate]', this.state, nextState);
     return (
       nextState.isPlaybackFloating !== this.state.isPlaybackFloating ||
       nextState.showSongSelectionModal !== this.state.showSongSelectionModal ||
       nextState.queue !== this.state.queue ||
-      nextState.video !== this.state.video
+      nextState.video !== this.state.video ||
+      nextState.history !== this.state.history
     );
   }
 
@@ -101,6 +111,7 @@ class App extends Component {
 
   componentWillMount() {
     ws.init();
+
     ws.registerHandler(ws.ACTIONS.PLAYBACK_FETCH, result => {
       console.log('[playback_fetch] returned result');
       console.log(result);
@@ -111,6 +122,7 @@ class App extends Component {
         }
       });
     });
+
     ws.registerHandler(ws.ACTIONS.PLAYBACK_STARTED, video => {
       this.setState({
         video: {
@@ -118,17 +130,26 @@ class App extends Component {
         }
       });
     });
+
     ws.registerHandler(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
       this.setState({
         queue: playlist
       });
     });
+
     ws.registerHandler(ws.ACTIONS.PLAYBACK_ENDED, playlist => {
       console.log('[playback_ended]');
       this.setState({
         video: {
           src: null
         }
+      });
+    });
+
+    ws.registerHandler(ws.ACTIONS.HISTORY_FETCH, history => {
+      console.log('history', history);
+      this.setState({
+        history: history
       });
     });
   }

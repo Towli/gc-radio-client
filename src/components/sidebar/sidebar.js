@@ -5,6 +5,7 @@ import './sidebar.css';
 import NowPlayingIcon from '../icons/now.playing';
 import SocialIcon from '../icons/social';
 import QueueIcon from '../icons/queue';
+import HistoryIcon from '../icons/history';
 
 class Sidebar extends Component {
   render() {
@@ -28,6 +29,12 @@ class Sidebar extends Component {
             <li>
               <NavLink exact to="/queue">
                 <QueueIcon className="icon" />
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink exact to="/history">
+                <HistoryIcon className="icon" />
               </NavLink>
             </li>
           </ul>

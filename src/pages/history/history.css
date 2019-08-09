@@ -1,0 +1,15 @@
+.history-container {
+  width: 50%;
+  height: 80%;
+}
+
+h2.title {
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .history-container {
+    width: 90%;
+    height: 80%;
+  }
+}

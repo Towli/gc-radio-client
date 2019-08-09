@@ -53,7 +53,7 @@ class SearchModal extends Component {
                 <input
                   type="search"
                   id="query"
-                  autocomplete="off"
+                  autoComplete="off"
                   ref={this.searchInputQuery}
                   onKeyDown={this.handleKeyDown}
                   onChange={event => {
@@ -68,7 +68,7 @@ class SearchModal extends Component {
                 <input
                   type="search"
                   id="url"
-                  autocomplete="off"
+                  autoComplete="off"
                   ref={this.searchInputUrl}
                   onKeyDown={this.handleKeyDown}
                   onChange={event => {

@@ -19,9 +19,11 @@ class Queue extends Component {
         </div>
       );
     }
+    console.log(items);
 
     return (
       <div className="queue-container">
+        <h2 className="title">queue</h2>
         <div className="queue">
           {items.map((item, index) => {
             let parsedItem = JSON.parse(item);
@@ -43,8 +45,6 @@ class Queue extends Component {
   }
 
   removeItem(id) {
-    console.log('removeItem');
-    console.log(id);
     ws.emit(ws.ACTIONS.PLAYLIST_REMOVE, id),
       () => {
         this.fetch();

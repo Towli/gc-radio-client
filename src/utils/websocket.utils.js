@@ -11,7 +11,8 @@ export const ACTIONS = {
   PLAYLIST_FETCH: 'playlist_fetch',
   PLAYBACK_STARTED: 'playback_started',
   PLAYBACK_ENDED: 'playback_ended',
-  PLAYBACK_FETCH: 'playback_fetch'
+  PLAYBACK_FETCH: 'playback_fetch',
+  HISTORY_FETCH: 'history_fetch'
 };
 
 export function init() {
@@ -29,6 +30,6 @@ export function emit(message, data, callback) {
   socket.emit(message, data, callback);
 }
 
-export function addToPlaylist(url) {
-  socket.emit(ACTIONS.PLAYLIST_ADD, url);
+export function addToPlaylist(item) {
+  socket.emit(ACTIONS.PLAYLIST_ADD, item);
 }

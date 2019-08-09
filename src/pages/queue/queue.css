@@ -1,6 +1,6 @@
 .queue-container {
   height: 80%;
-  width: 60%;
+  width: 50%;
 }
 
 .queue {
@@ -16,9 +16,9 @@
   overflow: scroll;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
   .queue-container {
-    height: 80%;
     width: 90%;
+    height: 80%;
   }
 }

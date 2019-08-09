@@ -11,7 +11,9 @@ class Topbar extends Component {
       <div className="topbar">
         <div className="header">
           <div className="logo-container">
-            <BonkLogo className="logo" />
+            <NavLink exact to="/live">
+              <BonkLogo className="logo" />
+            </NavLink>
           </div>
           <NavLink className="app-name" exact to="/live">
             bonk.fm

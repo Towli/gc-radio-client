@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - 'stable'
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run build
+
+deploy:
+  on:
+    branch: master
+  provider: s3
+  access_key_id: $AWS_ACCESS_ID
+  secret_access_key: $AWS_ACCESS_KEY
+  bucket: $BUCKET
+  skip_cleanup: true
+  local_dir: build
+  acl: public_read

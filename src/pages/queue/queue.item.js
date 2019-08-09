@@ -6,7 +6,7 @@ class Queue extends Component {
     return (
       <div className="queue-item">
         <span className="item-index">{this.props.index}</span>
-        <img className="item-thumbnail" src={this.props.thumbnail.url} />
+        <img className="item-thumbnail" src={this.props.thumbnail.url} alt='thumb'/>
         <div className="item-detail">
           <span className="item-name">{this.props.name}</span>
           <span className="item-duration">

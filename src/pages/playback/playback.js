@@ -8,9 +8,6 @@ import * as ws from '../../utils/websocket.utils';
 class Playback extends Component {
   player = null;
 
-  constructor(props) {
-    super(props);
-  }
   render() {
     console.log('render - ', this.props);
 

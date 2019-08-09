@@ -45,10 +45,9 @@ class Queue extends Component {
   }
 
   removeItem(id) {
-    ws.emit(ws.ACTIONS.PLAYLIST_REMOVE, id),
-      () => {
-        this.fetch();
-      };
+    ws.emit(ws.ACTIONS.PLAYLIST_REMOVE, id, () => {
+      this.fetch();
+    });
   }
 
   static getDerivedStateFromProps(props, state) {

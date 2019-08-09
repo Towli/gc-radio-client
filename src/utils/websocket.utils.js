@@ -12,7 +12,8 @@ export const ACTIONS = {
   PLAYBACK_STARTED: 'playback_started',
   PLAYBACK_ENDED: 'playback_ended',
   PLAYBACK_FETCH: 'playback_fetch',
-  HISTORY_FETCH: 'history_fetch'
+  HISTORY_FETCH: 'history_fetch',
+  USERS_FETCH: 'users_fetch'
 };
 
 export function init() {

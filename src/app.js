@@ -18,6 +18,7 @@ class App extends Component {
       video: { src: null, currentTime: null },
       queue: [],
       history: [],
+      users: [],
       showSongSelectionModal: false,
       isPlaybackFloating: false
     };
@@ -25,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div id="app-container">
-        <Topbar callback={this.handleTopbarAction} />
+        <Topbar users={this.state.users} callback={this.handleTopbarAction} />
         <div id="column-1">
           <Sidebar />
         </div>
@@ -91,7 +92,8 @@ class App extends Component {
       nextState.showSongSelectionModal !== this.state.showSongSelectionModal ||
       nextState.queue !== this.state.queue ||
       nextState.video !== this.state.video ||
-      nextState.history !== this.state.history
+      nextState.history !== this.state.history ||
+      nextState.users !== this.state.users
     );
   }
 
@@ -113,8 +115,6 @@ class App extends Component {
     ws.init();
 
     ws.registerHandler(ws.ACTIONS.PLAYBACK_FETCH, result => {
-      console.log('[playback_fetch] returned result');
-      console.log(result);
       this.setState({
         video: {
           src: result.currentPlayback.embedUrl,
@@ -137,8 +137,7 @@ class App extends Component {
       });
     });
 
-    ws.registerHandler(ws.ACTIONS.PLAYBACK_ENDED, playlist => {
-      console.log('[playback_ended]');
+    ws.registerHandler(ws.ACTIONS.PLAYBACK_ENDED, () => {
       this.setState({
         video: {
           src: null
@@ -150,6 +149,13 @@ class App extends Component {
       console.log('history', history);
       this.setState({
         history: history
+      });
+    });
+
+    ws.registerHandler(ws.ACTIONS.USERS_FETCH, users => {
+      console.log('users', users);
+      this.setState({
+        users: users
       });
     });
   }

@@ -6,6 +6,7 @@ import BonkLogo from '../icons/bonk.logo';
 
 class Topbar extends Component {
   render() {
+    const userCount = this.props.users ? this.props.users.length : null;
     return (
       <div className="topbar">
         <div className="header">
@@ -15,6 +16,9 @@ class Topbar extends Component {
           <NavLink className="app-name" exact to="/live">
             bonk.fm
           </NavLink>
+        </div>
+        <div className="user-count">
+          {userCount} bonk boy{userCount > 1 ? 's' : ''} online
         </div>
         <div className="actions">
           <button
@@ -28,6 +32,11 @@ class Topbar extends Component {
         </div>
       </div>
     );
+  }
+
+  shouldComponentUpdate(nextProps) {
+    console.log('should update: ', nextProps.users !== this.props.users);
+    return nextProps.users !== this.props.users;
   }
 }
 

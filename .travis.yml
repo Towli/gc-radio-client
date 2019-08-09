@@ -14,4 +14,4 @@ deploy:
   bucket: $BUCKET
   skip_cleanup: true
   local_dir: build
-  cache_control: "max-age=21600"
+  acl: public_read

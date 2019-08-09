@@ -79,6 +79,5 @@
 
   .item-actions button {
     height: auto;
-    background-color: var(--color-danger-1);
   }
 }

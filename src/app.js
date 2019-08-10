@@ -9,6 +9,7 @@ import './app.css';
 
 import * as ws from './utils/websocket.utils';
 import SearchModal from './components/modal/search.modal';
+import AuthModal from './components/modal/auth.modal';
 import { ACTIONS } from './constants/actions';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
       history: [],
       users: [],
       showSongSelectionModal: false,
+      showAuthModal: false,
       isPlaybackFloating: false
     };
   }
@@ -79,6 +81,11 @@ class App extends Component {
           searchCallback={this.handleSearch}
           onCloseCallback={this.hideSongSelectionModal}
         />
+        <AuthModal
+          show={this.state.showAuthModal}
+          authCallback={this.handleAuth}
+          onCloseCallback={this.hideAuthModal}
+        />
       </div>
     );
   }
@@ -86,10 +93,11 @@ class App extends Component {
     ws.addToPlaylist(JSON.stringify(video));
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(_nextProps, nextState) {
     return (
       nextState.isPlaybackFloating !== this.state.isPlaybackFloating ||
       nextState.showSongSelectionModal !== this.state.showSongSelectionModal ||
+      nextState.showAuthModal !== this.state.showAuthModal ||
       nextState.queue !== this.state.queue ||
       nextState.video !== this.state.video ||
       nextState.history !== this.state.history ||
@@ -98,8 +106,15 @@ class App extends Component {
   }
 
   handleTopbarAction = event => {
-    if (event === ACTIONS.ADD_ITEM) {
-      this.showSongSelectionModal();
+    switch (event) {
+      case ACTIONS.ADD_ITEM:
+        this.showSongSelectionModal();
+        break;
+      case ACTIONS.AUTH_USER:
+        this.showAuthModal();
+        break;
+      default:
+        console.log('unknown action: ', event);
     }
   };
 
@@ -109,6 +124,14 @@ class App extends Component {
 
   hideSongSelectionModal = () => {
     this.setState({ showSongSelectionModal: false });
+  };
+
+  showAuthModal = () => {
+    this.setState({ showAuthModal: true });
+  };
+
+  hideAuthModal = () => {
+    this.setState({ showAuthModal: false });
   };
 
   componentWillMount() {

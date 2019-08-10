@@ -23,6 +23,14 @@ class Topbar extends Component {
           {userCount} bonk boy{userCount > 1 ? 's' : ''} online
         </div>
         <div className="actions">
+        <button
+            className="btn"
+            onClick={() => {
+              this.props.callback(ACTIONS.AUTH_USER);
+            }}
+          >
+            login
+          </button>
           <button
             className="btn"
             onClick={() => {

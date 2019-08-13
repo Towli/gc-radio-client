@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import * as API from '../../api';
+import { Auth } from '../../utils/validation.utils';
+
 import './auth.modal.css';
 
 class AuthModal extends Component {
@@ -9,6 +12,9 @@ class AuthModal extends Component {
     this.state = {
       show: false,
       login: true,
+      inputUsername: null,
+      inputPassword: null,
+      inputSecret: null,
       register: false,
       errors: []
     };
@@ -40,17 +46,26 @@ class AuthModal extends Component {
             <div className="modal-box-input">
               <div className="">
                 <label>username</label>
-                <input />
+                <input
+                  onChange={event => {
+                    this.setState({ inputUsername: event.target.value });
+                  }}
+                />
               </div>
               <div className="">
                 <label>password</label>
-                <input type="password" />
+                <input
+                  type="password"
+                  onChange={event => {
+                    this.setState({ inputPassword: event.target.value });
+                  }}
+                />
               </div>
             </div>
           </div>
           {errorView}
           <div className="modal-box-actions">
-            <button className="btn" onClick={this.search}>
+            <button className="btn" onClick={this.login}>
               login
             </button>
             <button
@@ -71,21 +86,35 @@ class AuthModal extends Component {
             <div className="modal-box-input">
               <div className="">
                 <label>username</label>
-                <input />
+                <input
+                  onChange={event => {
+                    this.setState({ inputUsername: event.target.value });
+                  }}
+                />
               </div>
               <div className="">
                 <label>password</label>
-                <input type="password" />
+                <input
+                  type="password"
+                  onChange={event => {
+                    this.setState({ inputPassword: event.target.value });
+                  }}
+                />
               </div>
               <div className="">
                 <label>secret</label>
-                <input type="password" />
+                <input
+                  type="password"
+                  onChange={event => {
+                    this.setState({ inputSecret: event.target.value });
+                  }}
+                />
               </div>
             </div>
           </div>
           {errorView}
           <div className="modal-box-actions">
-            <button className="btn" onClick={this.search}>
+            <button className="btn" onClick={this.register}>
               register
             </button>
             <button
@@ -112,6 +141,7 @@ class AuthModal extends Component {
             <div
               className="header login"
               onClick={() => {
+                this.resetErrors();
                 this.setState({ login: true, register: false });
               }}
             >
@@ -120,6 +150,7 @@ class AuthModal extends Component {
             <div
               className="header register"
               onClick={() => {
+                this.resetErrors();
                 this.setState({ login: false, register: true });
               }}
             >
@@ -132,12 +163,63 @@ class AuthModal extends Component {
     );
   }
 
+  register = () => {
+    this.resetErrors();
+
+    const username = this.state.inputUsername;
+    const password = this.state.inputPassword;
+    const secret = this.state.inputSecret;
+
+    if (!username || !password) {
+      return this.addError('complete all fields u pepega');
+    }
+
+    if (!Auth.isValidPassword(password)) {
+      return this.addError('password must be 8 chars or more');
+    }
+
+    if (!Auth.isValidUsername(username)) {
+      this.addError('username must be between 3 and 30 chars');
+    }
+
+    if (!secret) {
+      return this.addError('please enter a secret');
+    }
+
+    API.register(username, password, secret)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        this.addError(error.message);
+      });
+  };
+
+  login = () => {
+    this.resetErrors();
+
+    const username = this.state.inputUsername;
+    const password = this.state.inputPassword;
+
+    if (!username || !password) {
+      return this.addError('complete all fields u pepega');
+    }
+
+    API.login(username, password)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        this.addError(error.message);
+      });
+  };
+
   handleKeyDown = async event => {
     if (event.keyCode !== 13 || !event.target.value) {
       return;
     }
 
-    this.search();
+    // register() or login()
   };
 
   addError = error => {

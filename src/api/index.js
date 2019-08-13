@@ -2,6 +2,14 @@ import { Query } from '../utils/validation.utils';
 import axios from 'axios';
 import { config } from '../config';
 
+export function register(username, password, secret) {
+  return makeRequest(config.API_URI, 'post', { username, password, secret });
+}
+
+export function login(username, password) {
+  return makeRequest(config.API_URI, 'post', { username, password });
+}
+
 export function search(query, queryType) {
   return new Promise((resolve, reject) => {
     try {

@@ -15,3 +15,17 @@ export const Url = {
     return !!url.match(regex);
   }
 };
+
+export const Auth = {
+  isValidUsername(username) {
+    return (
+      username &&
+      typeof username === 'string' &&
+      username.length <= 20 &&
+      username.length >= 3
+    );
+  },
+  isValidPassword(password) {
+    return password && typeof password === 'string' && password.length >= 8;
+  }
+};

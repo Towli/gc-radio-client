@@ -55,7 +55,7 @@
   color: var(--color-dark-1);
 }
 
-span {
+.modal-box span {
   display: block;
   text-align: center;
   color: var(--color-dark-1);

@@ -1,7 +1,6 @@
 .modal-box.auth {
   padding: 0 0 2.5em 0;
   height: 40%;
-  color: white;
 }
 
 .tab {
@@ -16,12 +15,12 @@
   width: 50%;
   text-align: center;
   vertical-align: center;
-  color: white;
   cursor: pointer;
 }
 
 .tab .header span {
   margin: auto;
+  color: var(--color-light-3);
 }
 
 .auth-form {
@@ -47,7 +46,8 @@
   background-color: var(--color-posi-6);
 }
 
-.login .btn-danger, .register .btn-danger {
+.login .btn-danger,
+.register .btn-danger {
   background-color: var(--color-danger-1);
 }
 
@@ -57,5 +57,13 @@
 }
 
 .auth .inputs-container {
+  margin-bottom: 1em;
+}
+
+.auth label {
+  color: white;
+}
+
+.auth .errors {
   margin-bottom: 1em;
 }

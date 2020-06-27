@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import './topbar.css';
-import { ACTIONS } from '../../constants/actions';
-import BonkLogo from '../icons/bonk.logo';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import "./topbar.css";
+import { ACTIONS } from "../../constants/actions";
+import BonkLogo from "../icons/bonk.logo";
 
 class Topbar extends Component {
   render() {
@@ -20,17 +20,9 @@ class Topbar extends Component {
           </NavLink>
         </div>
         <div className="user-count">
-          {userCount} bonk boy{userCount > 1 ? 's' : ''} online
+          {userCount} bonk boy{userCount > 1 ? "s" : ""} online
         </div>
         <div className="actions">
-        <button
-            className="btn"
-            onClick={() => {
-              this.props.callback(ACTIONS.AUTH_USER);
-            }}
-          >
-            login
-          </button>
           <button
             className="btn"
             onClick={() => {
@@ -45,7 +37,7 @@ class Topbar extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    console.log('should update: ', nextProps.users !== this.props.users);
+    console.log("should update: ", nextProps.users !== this.props.users);
     return nextProps.users !== this.props.users;
   }
 }

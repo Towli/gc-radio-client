@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import YouTubePlayer from 'youtube-player';
+import React, { Component } from "react";
+import YouTubePlayer from "youtube-player";
 
-import './playback.css';
+import "./playback.css";
 
-import * as ws from '../../utils/websocket.utils';
+import * as ws from "../../utils/websocket.utils";
 
 class Playback extends Component {
   player = null;
 
   render() {
-    console.log('render - ', this.props);
+    console.log("render - ", this.props);
 
     const blankContainer = (
       <div className="playback-container">
@@ -38,19 +38,19 @@ class Playback extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount - ', 'props: ', this.props);
+    console.log("componentDidMount - ", "props: ", this.props);
     ws.emit(ws.ACTIONS.PLAYBACK_FETCH);
 
-    this.player = new YouTubePlayer('ytplayer', {
+    this.player = new YouTubePlayer("ytplayer", {
       playerVars: { autoplay: 1, controls: 1 },
       width: 640,
-      height: 360
+      height: 360,
     });
   }
 
   startPlayback() {
     if (this.player) {
-      console.log('starting playing: ', this.props.src, this.props.currentTime);
+      console.log("starting playing: ", this.props.src, this.props.currentTime);
       this.player.loadVideoById(
         this.getVideoId(this.props.src),
         this.props.currentTime
@@ -58,22 +58,16 @@ class Playback extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(
-      'shouldComponentUpdate',
-      this.props.src !== nextProps.src ||
-        this.props.currentTime !== nextProps.currentTime,
-      nextProps.src,
-      nextProps.currentTime
-    );
+  shouldComponentUpdate(nextProps, _nextState) {
     return (
       this.props.src !== nextProps.src ||
-      this.props.currentTime !== nextProps.currentTime
+      this.props.currentTime !== nextProps.currentTime ||
+      this.props.happenedAt !== nextProps.happenedAt
     );
   }
 
   getVideoId(src) {
-    return src && src.split('embed/')[1];
+    return src && src.split("embed/")[1];
   }
 }
 

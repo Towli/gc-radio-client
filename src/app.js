@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import Playback from './pages/playback/playback';
-import Queue from './pages/queue/queue';
-import History from './pages/history/history';
-import Topbar from './components/topbar/topbar';
-import Sidebar from './components/sidebar/sidebar';
-import './app.css';
+import React, { Component } from "react";
+import { Route, Redirect } from "react-router-dom";
+import Playback from "./pages/playback/playback";
+import Queue from "./pages/queue/queue";
+import History from "./pages/history/history";
+import Topbar from "./components/topbar/topbar";
+import Sidebar from "./components/sidebar/sidebar";
+import "./app.css";
 
-import * as ws from './utils/websocket.utils';
-import SearchModal from './components/modal/search.modal';
-import AuthModal from './components/modal/auth.modal';
-import { ACTIONS } from './constants/actions';
+import * as ws from "./utils/websocket.utils";
+import SearchModal from "./components/modal/search.modal";
+import AuthModal from "./components/modal/auth.modal";
+import { ACTIONS } from "./constants/actions";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      video: { src: null, currentTime: null },
+      video: { src: null, currentTime: null, happenedAt: null },
       queue: [],
       history: [],
       users: [],
       showSongSelectionModal: false,
       showAuthModal: false,
-      isPlaybackFloating: false
+      isPlaybackFloating: false,
     };
   }
   render() {
@@ -35,25 +35,26 @@ class App extends Component {
         <div id="column-2">
           <div className="main-container">
             <div
-              className={this.state.isPlaybackFloating && 'floating-container'}
+              className={this.state.isPlaybackFloating && "floating-container"}
             >
               <Playback
                 src={this.state.video.src}
                 currentTime={this.state.video.currentTime}
+                happenedAt={this.state.video.happenedAt}
               />
             </div>
             <Redirect from="/" to="/live" />
             <Route
               exact
               path="/live"
-              render={props => {
+              render={(props) => {
                 this.setState({ isPlaybackFloating: false });
               }}
             />
             <Route
               exact
               path="/social"
-              render={props => {
+              render={(props) => {
                 this.setState({ isPlaybackFloating: true });
                 return <h3>coming soon</h3>;
               }}
@@ -61,7 +62,7 @@ class App extends Component {
             <Route
               exact
               path="/history"
-              render={props => {
+              render={(props) => {
                 this.setState({ isPlaybackFloating: true });
                 return <History items={this.state.history} />;
               }}
@@ -69,7 +70,7 @@ class App extends Component {
             <Route
               exact
               path="/queue"
-              render={props => {
+              render={(props) => {
                 this.setState({ isPlaybackFloating: true });
                 return <Queue items={this.state.queue} />;
               }}
@@ -89,7 +90,7 @@ class App extends Component {
       </div>
     );
   }
-  handleSearch = video => {
+  handleSearch = (video) => {
     ws.addToPlaylist(JSON.stringify(video));
   };
 
@@ -105,7 +106,7 @@ class App extends Component {
     );
   }
 
-  handleTopbarAction = event => {
+  handleTopbarAction = (event) => {
     switch (event) {
       case ACTIONS.ADD_ITEM:
         this.showSongSelectionModal();
@@ -114,7 +115,7 @@ class App extends Component {
         this.showAuthModal();
         break;
       default:
-        console.log('unknown action: ', event);
+        console.log("unknown action: ", event);
     }
   };
 
@@ -137,48 +138,53 @@ class App extends Component {
   componentWillMount() {
     ws.init();
 
-    ws.registerHandler(ws.ACTIONS.PLAYBACK_FETCH, result => {
+    ws.registerHandler(ws.ACTIONS.PLAYBACK_FETCH, (result) => {
+      console.log("PLAYBACK_FETCH: ", result);
       this.setState({
         video: {
           src: result.currentPlayback.embedUrl,
-          currentTime: result.currentTime
-        }
+          currentTime: result.currentPlayback.currentTime,
+          happenedAt: result.currentPlayback.happenedAt,
+        },
       });
     });
 
-    ws.registerHandler(ws.ACTIONS.PLAYBACK_STARTED, video => {
+    ws.registerHandler(ws.ACTIONS.PLAYBACK_STARTED, (video) => {
+      console.log("PLAYBACK_STARTED: ", video);
       this.setState({
         video: {
-          src: video.embedUrl
-        }
+          src: video.embedUrl,
+          currentTime: video.currentTime,
+          happenedAt: video.happenedAt,
+        },
       });
     });
 
-    ws.registerHandler(ws.ACTIONS.PLAYLIST_FETCH, playlist => {
+    ws.registerHandler(ws.ACTIONS.PLAYLIST_FETCH, (playlist) => {
       this.setState({
-        queue: playlist
+        queue: playlist,
       });
     });
 
     ws.registerHandler(ws.ACTIONS.PLAYBACK_ENDED, () => {
       this.setState({
         video: {
-          src: null
-        }
+          src: null,
+        },
       });
     });
 
-    ws.registerHandler(ws.ACTIONS.HISTORY_FETCH, history => {
-      console.log('history', history);
+    ws.registerHandler(ws.ACTIONS.HISTORY_FETCH, (history) => {
+      console.log("history", history);
       this.setState({
-        history: history
+        history: history,
       });
     });
 
-    ws.registerHandler(ws.ACTIONS.USERS_FETCH, users => {
-      console.log('users', users);
+    ws.registerHandler(ws.ACTIONS.USERS_FETCH, (users) => {
+      console.log("users", users);
       this.setState({
-        users: users
+        users: users,
       });
     });
   }

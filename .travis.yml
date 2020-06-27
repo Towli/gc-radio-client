@@ -1,11 +1,15 @@
 language: node_js
 node_js:
-  - 'stable'
+  - "stable"
 cache:
   directories:
     - node_modules
 script:
   - npm run build
+
+install:
+  - npm install -g travis-ci-cloudfront-invalidation
+  - npm install
 
 deploy:
   on:
@@ -17,3 +21,6 @@ deploy:
   skip_cleanup: true
   local_dir: build
   acl: public_read
+
+after_deploy:
+  - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_ID -s $AWS_ACCESS_KEY -c $AWS_CLOUDFRONT_DIST_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST

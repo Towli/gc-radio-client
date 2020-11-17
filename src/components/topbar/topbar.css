@@ -6,6 +6,7 @@
   background-color: var(--color-dark-1);
   display: flex;
   align-items: center;
+  justify-content:flex-start;
 }
 
 .topbar .header {
@@ -25,22 +26,22 @@
   transform: scale(1.1);
 }
 
-.topbar .actions {
-  width: 89%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+.topbar .topbar-right {
+  margin-left: auto;
 }
 
-.topbar .actions .btn {
+.topbar .topbar-right .btn {
+  margin-right: 1em;
   height: 100%;
   border: none;
   background-color: var(--color-posi-6);
+  border-radius: 5em;
+  font-weight: bold
 }
 
-.topbar .actions .btn:hover {
-  background-color: var(--color-posi-2);
+.topbar .topbar-right .btn#queue-song {
+  background-color: white !important;
+  color: var(--color-dark-2);
 }
 
 .logo-container {
@@ -72,5 +73,15 @@
 @media (max-width: 600px) {
   .logo-container {
     width: 2.5em;
+  }
+
+  .topbar-right .btn {
+    font-size: .6em;
+  }
+}
+
+@media (max-width: 400px) {
+  .topbar {
+    font-size: .75em;
   }
 }

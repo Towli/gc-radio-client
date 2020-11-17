@@ -23,6 +23,7 @@ class App extends Component {
       showSongSelectionModal: false,
       showAuthModal: false,
       isPlaybackFloating: false,
+      hasUserJoinedBroadcast: false
     };
   }
   render() {
@@ -37,11 +38,12 @@ class App extends Component {
             <div
               className={this.state.isPlaybackFloating && "floating-container"}
             >
-              <Playback
+              {this.state.hasUserJoinedBroadcast && <Playback
                 src={this.state.video.src}
                 currentTime={this.state.video.currentTime}
                 happenedAt={this.state.video.happenedAt}
-              />
+                hasUserJoinedBroadcast={this.state.hasUserJoinedBroadcast}
+              />}
             </div>
             <Redirect from="/" to="/live" />
             <Route
@@ -102,7 +104,8 @@ class App extends Component {
       nextState.queue !== this.state.queue ||
       nextState.video !== this.state.video ||
       nextState.history !== this.state.history ||
-      nextState.users !== this.state.users
+      nextState.users !== this.state.users ||
+      nextState.hasUserJoinedBroadcast !== this.state.hasUserJoinedBroadcast
     );
   }
 
@@ -113,6 +116,9 @@ class App extends Component {
         break;
       case ACTIONS.AUTH_USER:
         this.showAuthModal();
+        break;
+      case ACTIONS.JOIN_BROADCAST:
+        this.joinBroadcast();
         break;
       default:
         console.log("unknown action: ", event);
@@ -135,6 +141,10 @@ class App extends Component {
     this.setState({ showAuthModal: false });
   };
 
+  joinBroadcast = () => {
+    this.setState({ hasUserJoinedBroadcast: true })
+  };
+
   componentWillMount() {
     ws.init();
 
@@ -143,7 +153,7 @@ class App extends Component {
       this.setState({
         video: {
           src: result.currentPlayback.embedUrl,
-          currentTime: result.currentPlayback.currentTime,
+          currentTime: result.currentTime,
           happenedAt: result.currentPlayback.happenedAt,
         },
       });

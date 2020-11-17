@@ -19,17 +19,24 @@ class Topbar extends Component {
             bonk.fm
           </NavLink>
         </div>
-        <div className="user-count">
-          {userCount} bonk boy{userCount > 1 ? "s" : ""} online
-        </div>
-        <div className="actions">
+        <div className="user-count">{this.humanizeUserCount(userCount)}</div>
+        <div className="topbar-right">
           <button
             className="btn"
+            onClick={() => {
+              this.props.callback(ACTIONS.JOIN_BROADCAST);
+            }}
+          >
+            join broadcast
+          </button>
+          <button
+            className="btn"
+            id="queue-song"
             onClick={() => {
               this.props.callback(ACTIONS.ADD_ITEM);
             }}
           >
-            add item
+            queue song
           </button>
         </div>
       </div>
@@ -39,6 +46,10 @@ class Topbar extends Component {
   shouldComponentUpdate(nextProps) {
     console.log("should update: ", nextProps.users !== this.props.users);
     return nextProps.users !== this.props.users;
+  }
+
+  humanizeUserCount(count) {
+    return `${count} listener${count === 1 ? "" : "s"}`;
   }
 }
 

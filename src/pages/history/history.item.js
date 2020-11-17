@@ -7,7 +7,7 @@ class History extends Component {
       <div className="history-item">
         <img className="item-thumbnail" src={this.props.thumbnail.url} alt='thumb'/>
         <div className="item-detail">
-          <span className="item-name">{this.props.name}</span>
+          <span className="item-name">{this.decodeHtmlEncodedName(this.props.name)}</span>
           <span className="item-duration">
             duration: {this.convertMsToTime(this.props.duration)}
           </span>
@@ -32,6 +32,12 @@ class History extends Component {
       .toISOString()
       .slice(11, -1)
       .split('.')[0];
+  }
+
+  decodeHtmlEncodedName(name) {
+    return name.replace(/&#(\d+);/g, function(_match, dec) {
+      return String.fromCharCode(dec);
+    });
   }
 }
 
